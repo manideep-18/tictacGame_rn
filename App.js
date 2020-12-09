@@ -6,7 +6,7 @@
  * @flow strict-local
  */
 
-import React from 'react';
+import React, { useState } from 'react';
 import {
   StyleSheet,
   View,
@@ -20,14 +20,45 @@ import {
   Body,
   Card,
   H1,H3,
-  Button
+  Button,
+  Title
 } from 'native-base'
+import Snackbar from 'react-native-snackbar'
+
+
+import Icons from './components/Icons';
+
+const itemArray=new Array(9).fill('empty')
 
 const App=()=>{
+  const [isCross,setIsCross]=useState(false)
+  const [winMessage,serWinMessage]=useState('')
+
+  const changeItem=(itemNumber)=>{
+
+  }
+
+  const reloadGame=()=>{
+
+  }
+
+  const checkIsWinner=()=>{
+
+  }
+
   return(
-    <>
-    
-    </>
+    <Container style={{backgroundColor:"333945",paddingVertical:5}}>
+      <Header>
+        <Body>
+          <Title>LCO TicTacToe</Title>
+        </Body>
+      </Header>
+      <Content>
+        <View style={styles.grid}>
+          <Icons/>
+        </View>
+      </Content>      
+    </Container>
   )
 }
 
