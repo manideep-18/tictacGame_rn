@@ -35,7 +35,26 @@ const App=()=>{
   const [winMessage,setWinMessage]=useState('')
 
   const changeItem=(itemNumber)=>{
+    if(winMessage){
+      return Snackbar.show({
+        text:winMessage,
+        backgroundColor:"#000",
+        textColor:'#FFF'
+      })
+    }
 
+    if(itemArray[itemNumber]==='empty'){
+      itemArray[itemNumber]=isCross?'cross':'circle'
+      setIsCross(!isCross)
+    }else{
+      return Snackbar.show({
+        text:'this position already filled',
+        backgroundColor:'red',
+        textColor:'#FFF'
+      })
+    }
+
+    checkIsWinner()
   }
 
   const reloadGame=()=>{
@@ -45,7 +64,9 @@ const App=()=>{
   }
 
   const checkIsWinner=()=>{
-
+    if(itemArray[0]===itemArray[1]&&itemArray[0]===itemArray[2]&&itemArray[0]!=='empty'){
+      setWinMessage(`${itemArray[0]} won`)
+    }
   }
 
   return(
