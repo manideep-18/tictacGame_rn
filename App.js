@@ -32,14 +32,16 @@ const itemArray=new Array(9).fill('empty')
 
 const App=()=>{
   const [isCross,setIsCross]=useState(false)
-  const [winMessage,serWinMessage]=useState('')
+  const [winMessage,setWinMessage]=useState('')
 
   const changeItem=(itemNumber)=>{
 
   }
 
   const reloadGame=()=>{
-
+    setIsCross(false)
+    setWinMessage('')
+    itemArray.fill('empty',0,9)
   }
 
   const checkIsWinner=()=>{
@@ -55,8 +57,26 @@ const App=()=>{
       </Header>
       <Content>
         <View style={styles.grid}>
-          <Icons/>
+          {itemArray.map((item,index)=>(
+            <TouchableOpacity key={index} style={styles.box} onPress={()=>{changeItem(index)}}>
+              <Card style={styles.card}>
+                <Icons name={item}/> 
+              </Card>
+            </TouchableOpacity>
+          ))}
         </View>
+        {winMessage?
+        (<View>
+          <H1 style={styles.message}>{winMessage}</H1>
+          <Button onPress={reloadGame} primary block rounded>
+            <Text>Reload Game</Text>
+          </Button>
+        </View>):
+        (
+          <H3 style={styles.message}>
+            {isCross?'Cross':'circle'} turns
+          </H3>
+        )}
       </Content>      
     </Container>
   )
@@ -86,6 +106,7 @@ const styles=StyleSheet.create({
     color:"#FFF",
     marginTop:20,
     backgroundColor:"#4652B3",
-    paddingVertical:10
+    paddingVertical:10,
+    marginVertical:10
   }
 })
